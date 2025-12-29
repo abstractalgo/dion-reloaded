@@ -1,4 +1,6 @@
-![](.github/docs/dion-reloaded.gif)
+| This project | original Dion Systems |
+| ------ | ------ |
+| ![](.github/docs/dion-reloaded.gif) | ![](.github/docs/dion.gif) |
 
 This project was directly inspired by [Dion Systems](#more-on-dion-systems) - a custom-built code editor that works directly with the AST representation, for both editing and rendering.
 
@@ -16,8 +18,6 @@ bun run dev # to run locally
 ```
 
 # More on Dion Systems
-
-![](.github/docs/dion.gif)
 
 - https://github.com/4coder-archive/4coder
 - https://handmade.network/snippet/251
