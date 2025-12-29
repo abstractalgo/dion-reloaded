@@ -1,6 +1,6 @@
 ![](.github/docs/dion-reloaded.gif)
 
-This project was directly inspired by Dion Systems - a custom-built code editor that works directly with the AST representation, for both editing and rendering.
+This project was directly inspired by [Dion Systems](#more-on-dion-systems) - a custom-built code editor that works directly with the AST representation, for both editing and rendering.
 
 Here we have a Monaco editor for users to input the [Typescript] source code. It then parses it and generates AST using `typescript` package. It then uses the generated AST to render things in the `<canvas>`.
 
