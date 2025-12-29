@@ -1,5 +1,5 @@
-| This project | original Dion Systems |
-| ------ | ------ |
+| This project                        | original Dion Systems      |
+| ----------------------------------- | -------------------------- |
 | ![](.github/docs/dion-reloaded.gif) | ![](.github/docs/dion.gif) |
 
 This project was directly inspired by [Dion Systems](#more-on-dion-systems) - a custom-built code editor that works directly with the AST representation, for both editing and rendering.

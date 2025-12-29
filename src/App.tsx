@@ -139,14 +139,21 @@ class ASTCanvasRenderer {
     showBraces?: boolean;
     showSemicolons?: boolean;
   }) {
-    if (settings.zoomLevel !== undefined) this.zoomLevel = settings.zoomLevel;
-    if (settings.maxNestingDepth !== undefined)
+    if (settings.zoomLevel !== undefined) {
+      this.zoomLevel = settings.zoomLevel;
+    }
+    if (settings.maxNestingDepth !== undefined) {
       this.maxNestingDepth = settings.maxNestingDepth;
-    if (settings.indent !== undefined) this.indent = settings.indent;
-    if (settings.showBraces !== undefined)
+    }
+    if (settings.indent !== undefined) {
+      this.indent = settings.indent;
+    }
+    if (settings.showBraces !== undefined) {
       this.showBraces = settings.showBraces;
-    if (settings.showSemicolons !== undefined)
+    }
+    if (settings.showSemicolons !== undefined) {
       this.showSemicolons = settings.showSemicolons;
+    }
   }
 
   setZoomCallback(callback: (zoomLevel: number) => void) {
@@ -238,7 +245,9 @@ class ASTCanvasRenderer {
   }
 
   render(ast: ts.Node | null, sourceFile?: ts.SourceFile) {
-    if (!ast) return;
+    if (!ast) {
+      return;
+    }
 
     if (sourceFile) {
       this.sourceFile = sourceFile;
@@ -270,9 +279,11 @@ class ASTCanvasRenderer {
     x: number,
     y: number,
     indentLevel: number,
-    nestingDepth: number
+    nestingDepth: number,
   ): number {
-    if (!this.sourceFile) return y;
+    if (!this.sourceFile) {
+      return y;
+    }
 
     // Dispatch to specific renderer based on node kind
     switch (node.kind) {
@@ -282,7 +293,7 @@ class ASTCanvasRenderer {
           x,
           y,
           indentLevel,
-          nestingDepth
+          nestingDepth,
         );
       case ts.SyntaxKind.FunctionDeclaration:
         return this.renderFunctionDeclaration(
@@ -290,7 +301,7 @@ class ASTCanvasRenderer {
           x,
           y,
           indentLevel,
-          nestingDepth
+          nestingDepth,
         );
       case ts.SyntaxKind.VariableStatement:
         return this.renderVariableStatement(
@@ -298,7 +309,7 @@ class ASTCanvasRenderer {
           x,
           y,
           indentLevel,
-          nestingDepth
+          nestingDepth,
         );
       case ts.SyntaxKind.ExpressionStatement:
         return this.renderExpressionStatement(
@@ -306,7 +317,7 @@ class ASTCanvasRenderer {
           x,
           y,
           indentLevel,
-          nestingDepth
+          nestingDepth,
         );
       case ts.SyntaxKind.ReturnStatement:
         return this.renderReturnStatement(
@@ -314,7 +325,7 @@ class ASTCanvasRenderer {
           x,
           y,
           indentLevel,
-          nestingDepth
+          nestingDepth,
         );
       case ts.SyntaxKind.Block:
         return this.renderBlock(
@@ -322,7 +333,7 @@ class ASTCanvasRenderer {
           x,
           y,
           indentLevel,
-          nestingDepth
+          nestingDepth,
         );
       case ts.SyntaxKind.IfStatement:
         return this.renderIfStatement(
@@ -330,7 +341,7 @@ class ASTCanvasRenderer {
           x,
           y,
           indentLevel,
-          nestingDepth
+          nestingDepth,
         );
       case ts.SyntaxKind.CallExpression:
         return this.renderCallExpression(
@@ -338,7 +349,7 @@ class ASTCanvasRenderer {
           x,
           y,
           indentLevel,
-          nestingDepth
+          nestingDepth,
         );
       case ts.SyntaxKind.BinaryExpression:
         return this.renderBinaryExpression(
@@ -346,7 +357,7 @@ class ASTCanvasRenderer {
           x,
           y,
           indentLevel,
-          nestingDepth
+          nestingDepth,
         );
       case ts.SyntaxKind.Identifier:
         return this.renderIdentifier(
@@ -354,7 +365,7 @@ class ASTCanvasRenderer {
           x,
           y,
           indentLevel,
-          nestingDepth
+          nestingDepth,
         );
       case ts.SyntaxKind.StringLiteral:
         return this.renderStringLiteral(
@@ -362,7 +373,7 @@ class ASTCanvasRenderer {
           x,
           y,
           indentLevel,
-          nestingDepth
+          nestingDepth,
         );
       default:
         return this.renderGenericNode(node, x, y, indentLevel, nestingDepth);
@@ -374,7 +385,7 @@ class ASTCanvasRenderer {
     x: number,
     y: number,
     indentLevel: number,
-    nestingDepth: number
+    nestingDepth: number,
   ): number {
     let currentY = y;
     node.statements.forEach((statement) => {
@@ -383,7 +394,7 @@ class ASTCanvasRenderer {
         x,
         currentY,
         indentLevel,
-        nestingDepth
+        nestingDepth,
       );
       currentY += this.lineHeight * 0.5; // Add spacing between top-level statements
     });
@@ -395,7 +406,7 @@ class ASTCanvasRenderer {
     x: number,
     y: number,
     indentLevel: number,
-    nestingDepth: number
+    nestingDepth: number,
   ): number {
     const indentX = x + indentLevel * this.indent;
     let currentY = y;
@@ -413,10 +424,10 @@ class ASTCanvasRenderer {
       this.ctx.fillText(
         " " + node.name.getText(this.sourceFile),
         currentX,
-        currentY
+        currentY,
       );
       currentX += this.ctx.measureText(
-        " " + node.name.getText(this.sourceFile)
+        " " + node.name.getText(this.sourceFile),
       ).width;
     }
 
@@ -488,7 +499,7 @@ class ASTCanvasRenderer {
           x,
           currentY,
           indentLevel,
-          childNestingDepth
+          childNestingDepth,
         );
       }
 
@@ -501,7 +512,7 @@ class ASTCanvasRenderer {
     x: number,
     y: number,
     indentLevel: number,
-    _nestingDepth: number
+    _nestingDepth: number,
   ): number {
     const indentX = x + indentLevel * this.indent;
     const text = node.getText(this.sourceFile);
@@ -523,7 +534,7 @@ class ASTCanvasRenderer {
     x: number,
     y: number,
     indentLevel: number,
-    nestingDepth: number
+    nestingDepth: number,
   ): number {
     const indentX = x + indentLevel * this.indent;
     return this.renderNode(
@@ -531,7 +542,7 @@ class ASTCanvasRenderer {
       indentX,
       y,
       indentLevel,
-      nestingDepth
+      nestingDepth,
     );
   }
 
@@ -540,7 +551,7 @@ class ASTCanvasRenderer {
     x: number,
     y: number,
     indentLevel: number,
-    _nestingDepth: number
+    _nestingDepth: number,
   ): number {
     const indentX = x + indentLevel * this.indent;
     let currentX = indentX;
@@ -570,7 +581,7 @@ class ASTCanvasRenderer {
     x: number,
     y: number,
     indentLevel: number,
-    nestingDepth: number
+    nestingDepth: number,
   ): number {
     let currentY = y;
     const isBlockScope = isBlockScopeNode(node);
@@ -591,7 +602,7 @@ class ASTCanvasRenderer {
           x,
           currentY,
           indentLevel + 1,
-          childNestingDepth
+          childNestingDepth,
         );
       });
     }
@@ -612,7 +623,7 @@ class ASTCanvasRenderer {
     x: number,
     y: number,
     indentLevel: number,
-    nestingDepth: number
+    nestingDepth: number,
   ): number {
     const indentX = x + indentLevel * this.indent;
     let currentY = y;
@@ -658,7 +669,7 @@ class ASTCanvasRenderer {
           x,
           currentY,
           indentLevel,
-          childNestingDepth
+          childNestingDepth,
         );
       } else {
         currentY = this.renderNode(
@@ -666,7 +677,7 @@ class ASTCanvasRenderer {
           x,
           currentY,
           indentLevel + 1,
-          childNestingDepth
+          childNestingDepth,
         );
       }
     }
@@ -717,7 +728,7 @@ class ASTCanvasRenderer {
               x,
               currentY,
               indentLevel,
-              childNestingDepth
+              childNestingDepth,
             );
           } else {
             currentY = this.renderNode(
@@ -725,7 +736,7 @@ class ASTCanvasRenderer {
               x,
               currentY,
               indentLevel + 1,
-              childNestingDepth
+              childNestingDepth,
             );
           }
         }
@@ -742,7 +753,7 @@ class ASTCanvasRenderer {
           this.ctx.fillText(
             " {",
             elseIndentX + this.ctx.measureText("else").width,
-            currentY
+            currentY,
           );
         }
         currentY += this.lineHeight;
@@ -761,7 +772,7 @@ class ASTCanvasRenderer {
               x,
               currentY,
               indentLevel,
-              childNestingDepth
+              childNestingDepth,
             );
           } else {
             currentY = this.renderNode(
@@ -769,7 +780,7 @@ class ASTCanvasRenderer {
               x,
               currentY,
               indentLevel + 1,
-              childNestingDepth
+              childNestingDepth,
             );
           }
         }
@@ -787,7 +798,7 @@ class ASTCanvasRenderer {
     x: number,
     y: number,
     _indentLevel: number,
-    _nestingDepth: number
+    _nestingDepth: number,
   ): number {
     this.ctx.fillStyle = this.colors.default;
     const text = node.getText(this.sourceFile);
@@ -806,7 +817,7 @@ class ASTCanvasRenderer {
     x: number,
     y: number,
     _indentLevel: number,
-    _nestingDepth: number
+    _nestingDepth: number,
   ): number {
     const text = node.getText(this.sourceFile);
     this.ctx.fillStyle = this.colors.default;
@@ -819,7 +830,7 @@ class ASTCanvasRenderer {
     x: number,
     y: number,
     _indentLevel: number,
-    _nestingDepth: number
+    _nestingDepth: number,
   ): number {
     const text = node.getText(this.sourceFile);
     this.ctx.fillStyle = this.colors.identifier;
@@ -832,7 +843,7 @@ class ASTCanvasRenderer {
     x: number,
     y: number,
     _indentLevel: number,
-    _nestingDepth: number
+    _nestingDepth: number,
   ): number {
     const text = node.getText(this.sourceFile);
     this.ctx.fillStyle = this.colors.string;
@@ -845,7 +856,7 @@ class ASTCanvasRenderer {
     x: number,
     y: number,
     indentLevel: number,
-    nestingDepth: number
+    nestingDepth: number,
   ): number {
     const indentX = x + indentLevel * this.indent;
     const text = node.getText(this.sourceFile);
@@ -868,7 +879,7 @@ class ASTCanvasRenderer {
         x,
         currentY,
         indentLevel,
-        childNestingDepth
+        childNestingDepth,
       );
     });
 
@@ -916,10 +927,14 @@ function greet(name: string): string {
 
   // Function to check if there are syntax errors in Monaco editor
   const hasSyntaxErrors = async (): Promise<boolean> => {
-    if (!editorRef.current || typeof window === "undefined") return true;
+    if (!editorRef.current || typeof window === "undefined") {
+      return true;
+    }
 
     const model = editorRef.current.getModel();
-    if (!model) return true;
+    if (!model) {
+      return true;
+    }
 
     try {
       const markers = editor.getModelMarkers({ owner: "typescript" });
@@ -945,7 +960,7 @@ function greet(name: string): string {
               newCode,
               ts.ScriptTarget.Latest,
               true,
-              ts.ScriptKind.TS
+              ts.ScriptKind.TS,
             );
 
             const maxDepth = calculateMaxNestingDepth(sourceFile);
@@ -965,7 +980,7 @@ function greet(name: string): string {
         }
       }, 300); // 300ms delay to let Monaco process the changes
     },
-    [zoomLevel]
+    [zoomLevel],
   );
 
   // Generate initial AST when component mounts
@@ -978,7 +993,7 @@ function greet(name: string): string {
             code,
             ts.ScriptTarget.Latest,
             true,
-            ts.ScriptKind.TS
+            ts.ScriptKind.TS,
           );
           const maxDepth = calculateMaxNestingDepth(sourceFile);
           setSourceFile(sourceFile);
