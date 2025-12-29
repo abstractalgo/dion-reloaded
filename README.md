@@ -27,3 +27,7 @@ bun run dev # to run locally
 - https://web.archive.org/web/20220918192200/https://dion.systems/
 - https://x.com/msimoni/status/1695076884269117469
 - https://news.ycombinator.com/item?id=32372707
+
+# Next
+
+It would be very interesting to try the LOD-based code rendering with something like GPUI (https://www.gpui.rs/, https://github.com/zed-industries/zed/tree/main/crates/gpui) and have it nateively integrated into Zed (https://zed.dev/).
